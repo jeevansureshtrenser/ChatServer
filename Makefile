@@ -29,4 +29,11 @@ build/%.o: src/%.c | build
 	@echo "Compiling $<..."
 	@$(CC) $(CFLAGS) -c $< -o $@
 
+# Ensure build directory exists
+build: 
+	@mkdir -p build 
+# Clean rule
+clean:
+	@echo "Cleaning..."
+	@rm -rf build
 #end of file
