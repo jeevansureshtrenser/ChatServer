@@ -34,12 +34,12 @@
 
 /******************************Global Variable declaration******************************/
 typedef struct {
-    char* ip;
+    const char* ip;
     int port;
 } CLIENT_CONFIG;
 
 static const CLIENT_CONFIG default_config = {
-    SERVER_IP,
+    (const char*)(SERVER_IP),
     PORT
 };
 
