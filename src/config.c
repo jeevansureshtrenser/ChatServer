@@ -17,10 +17,10 @@ CLIENT_CONFIG* get_server_config(void);
 //******************************* Function Definition ******************************* //
 
 /**********************************************************************
-* Function name     : get_server_config
-* Description       : to load Server Configuration
+* Function name     : get_client_config
+* Description       : to load Client Configuration
 * Arguments         : void
-* Return type       : ServerConfig* - pointer to server configuration
+* Return type       : ClientConfig* - pointer to client configuration
 *************************************************************************/
 CLIENT_CONFIG* get_client_config(void) 
 {
@@ -31,7 +31,7 @@ CLIENT_CONFIG* get_client_config(void)
     {
         static CLIENT_CONFIG custom_config;
         printf("Enter server IP address: ");
-        static char ip_buffer[16];
+        static char ip_buffer[BUF_SIZE];
         scanf("%15s", ip_buffer);
         getchar(); // consume newline
         custom_config.ip = ip_buffer;

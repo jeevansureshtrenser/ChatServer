@@ -25,7 +25,7 @@
 #define TIMEOUT_SEC         1
 #define TIMEOUT_USEC        100
 #define MAX_BUFFER_SIZE     1024
-
+#define BUF_SIZE            256
 #define UDP                 0
 #define PROTOCOL            UDP
 
