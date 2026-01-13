@@ -1,8 +1,8 @@
 /************************************************************
-* File name     : server.c
-* Description   : source file for server implementation
+* File name     : client.c
+* Description   : source file for client implementation
 * Author        : Jeevan Suresh
-* License       : Copyright (c) 2025 Trenser 
+* License       : Copyright (c) xxx Trenser 
                     All Rights Reserved
 **************************************************************/
 
@@ -30,8 +30,9 @@ struct sockaddr_in* InitializeClient(int *sockfd)
 {
     int client_fd = DEF_CLEAR;
     struct sockaddr_in *address = (struct sockaddr_in *)malloc(sizeof(struct sockaddr_in));
-    CLIENT_CONFIG* config = get_client_config();
-    if(config == NULL) {
+    CLIENT_CONFIG* config = GetClientConfig();
+    if(config == NULL)
+    {
         perror("Failed to get client configuration");
         return NULL;
     }
@@ -75,16 +76,16 @@ struct sockaddr_in* InitializeClient(int *sockfd)
 * Function name     : CleanupClient
 * Description       : to cleanup client
 * Arguments         : int socket - socket file descriptor
-* Return type       : int - 0 on success, -1 on error
+* Return type       : int - zero on success, -one on error
 *************************************************************************/
 int CleanupClient(int socket)
 {
     if(close(socket) < 0) {
-        return -1; // error
+        return FAILURE; // error
     }
     else
     {
         /* No-op */
     }
-    return 0; // success
+    return SUCCESS; // success
 }

@@ -12,7 +12,7 @@
 int sockfd = DEF_CLEAR; 
 struct sockaddr_in *servaddr = NULL; 
 socklen_t addrlen = sizeof(struct sockaddr_in); 
-void *receive_messages(void *arg) 
+void *ReceiveMessages(void *arg) 
 { 
     char *buffer = (char *)malloc(MAX_BUFFER_SIZE);
     int iReadBytes = DEF_CLEAR;
@@ -31,7 +31,7 @@ void *receive_messages(void *arg)
     } 
     return NULL;
 }
-void *send_messages(void *arg)
+void *SendMessages(void *arg)
 { 
     char *buffer = (char *)malloc(MAX_BUFFER_SIZE); 
     while (DEF_TRUE)
@@ -59,8 +59,8 @@ void *send_messages(void *arg)
 
 int main() 
 {
-    pthread_t recv_thread = DEF_CLEAR;
-    pthread_t send_thread = DEF_CLEAR;
+    pthread_t Recvthread = DEF_CLEAR;
+    pthread_t Sendthread = DEF_CLEAR;
     servaddr = InitializeClient(&sockfd);
     if(servaddr == NULL)
     {
@@ -92,7 +92,7 @@ int main()
         /* No-op */
     }
 #endif
-    if(pthread_create(&recv_thread, NULL, receive_messages, NULL) != SUCCESS) {
+    if(pthread_create(&Recvthread, NULL, ReceiveMessages, NULL) != SUCCESS) {
         perror("Failed to create receive thread");
         exit(EXIT_FAILURE);
     }
@@ -100,7 +100,7 @@ int main()
     {
         /* No-op */
     }
-    if(pthread_create(&send_thread, NULL, send_messages, NULL) != SUCCESS) {
+    if(pthread_create(&Sendthread, NULL, SendMessages, NULL) != SUCCESS) {
         perror("Failed to create send thread");
         exit(EXIT_FAILURE);
     }
@@ -108,7 +108,7 @@ int main()
     {
         /* No-op */
     }
-    if(pthread_join(recv_thread, NULL) != SUCCESS) {
+    if(pthread_join(Recvthread, NULL) != SUCCESS) {
         perror("Failed to join receive thread");
         exit(EXIT_FAILURE);
     }
@@ -116,7 +116,7 @@ int main()
     {
         /* No-op */
     }
-    if(pthread_join(send_thread, NULL) != SUCCESS) {
+    if(pthread_join(Sendthread, NULL) != SUCCESS) {
         perror("Failed to join send thread");
         exit(EXIT_FAILURE);
     }

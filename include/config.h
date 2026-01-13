@@ -44,6 +44,6 @@ static const CLIENT_CONFIG default_config = {
 };
 
 /******************************Function declaration******************************/
-extern CLIENT_CONFIG* get_client_config();
+extern CLIENT_CONFIG* GetClientConfig();
 
 #endif // __CONFIG_H__

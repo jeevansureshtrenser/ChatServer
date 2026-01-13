@@ -2,7 +2,7 @@
 * File name     : config.c
 * Description   : source file for configuration
 * Author        : Jeevan Suresh
-* License       : Copyright (c) 2026 Trenser 
+* License       : Copyright (c) xxx Trenser 
                     All Rights Reserved
 **************************************************************/
 
@@ -12,7 +12,7 @@
 #include <stdlib.h>
 
 //******************************* Function Declaration ******************************* //
-CLIENT_CONFIG* get_server_config(void);
+CLIENT_CONFIG* GetClientConfig(void);
 
 //******************************* Function Definition ******************************* //
 
@@ -22,7 +22,7 @@ CLIENT_CONFIG* get_server_config(void);
 * Arguments         : void
 * Return type       : ClientConfig* - pointer to client configuration
 *************************************************************************/
-CLIENT_CONFIG* get_client_config(void) 
+CLIENT_CONFIG* GetClientConfig(void) 
 {
     printf("Do you want to load custom client configuration? (y/n): ");
     char choice = getchar();
