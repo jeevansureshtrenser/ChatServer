@@ -20,6 +20,8 @@
 #define FAILURE             -1
 #define DEF_CLEAR           0
 #define DEF_SET             1
+#define DEF_TRUE            1
+#define NULL_CHAR           '\0'
 #define TIMEOUT_SEC         1
 #define TIMEOUT_USEC        100
 #define MAX_BUFFER_SIZE     1024

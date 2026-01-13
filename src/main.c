@@ -16,29 +16,29 @@ void *receive_messages(void *arg)
 { 
     char *buffer = (char *)malloc(MAX_BUFFER_SIZE);
     int iReadBytes = DEF_CLEAR;
-    while (1)
+    while (DEF_TRUE)
     { 
         iReadBytes = recvfrom(sockfd, buffer, MAX_BUFFER_SIZE - DEF_SET, DEF_CLEAR, NULL, NULL);
         if(iReadBytes > DEF_CLEAR)
         {
-            buffer[iReadBytes] = '\0';
+            buffer[iReadBytes] = NULL_CHAR;
             printf("\nMessage from server: %s", buffer);
             fflush(stdout);
         }
         memset(buffer, DEF_CLEAR, MAX_BUFFER_SIZE);
         iReadBytes = DEF_CLEAR;
-        sleep(1);
+        sleep(TIMEOUT_SEC);
     } 
     return NULL;
 }
 void *send_messages(void *arg)
 { 
     char *buffer = (char *)malloc(MAX_BUFFER_SIZE); 
-    while (1)
+    while (DEF_TRUE)
     {
         if(fgets(buffer, MAX_BUFFER_SIZE, stdin) != NULL) 
         {
-            if(sendto(sockfd, buffer, strlen(buffer), 0, (struct sockaddr*)servaddr, addrlen) < DEF_CLEAR)
+            if(sendto(sockfd, buffer, strlen(buffer), DEF_CLEAR, (struct sockaddr*)servaddr, addrlen) < DEF_CLEAR)
             {
                 perror("Failed to send message");
             }
@@ -62,7 +62,8 @@ int main()
     pthread_t recv_thread = DEF_CLEAR;
     pthread_t send_thread = DEF_CLEAR;
     servaddr = InitializeClient(&sockfd);
-    if(servaddr == NULL) {
+    if(servaddr == NULL)
+    {
         perror("Failed to initialize client");
         exit(EXIT_FAILURE);
     }
