@@ -30,9 +30,19 @@ struct sockaddr_in* InitializeClient(int *sockfd)
 {
     int client_fd = DEF_CLEAR;
     struct sockaddr_in *address = (struct sockaddr_in *)malloc(sizeof(struct sockaddr_in));
+    if(address == NULL)
+    {
+        perror("Failed to allocate memory for sockaddr_in");
+        return NULL;
+    }
+    else
+    {
+        /* No-op */
+    }
     CLIENT_CONFIG* config = GetClientConfig();
     if(config == NULL)
     {
+        free(address);
         perror("Failed to get client configuration");
         return NULL;
     }
@@ -80,7 +90,7 @@ struct sockaddr_in* InitializeClient(int *sockfd)
 *************************************************************************/
 int CleanupClient(int socket)
 {
-    if(close(socket) < 0) {
+    if(close(socket) <= FAILURE) {
         return FAILURE; // error
     }
     else
