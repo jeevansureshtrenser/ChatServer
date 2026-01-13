@@ -2,7 +2,7 @@
 * File name     : config.c
 * Description   : source file for configuration
 * Author        : Jeevan Suresh
-* License       : Copyright (c) xxx Trenser 
+* License       : Copyright (c) 2026 Trenser 
                     All Rights Reserved
 **************************************************************/
 
@@ -12,38 +12,41 @@
 #include <stdlib.h>
 
 //******************************* Function Declaration ******************************* //
-CLIENT_CONFIG* GetClientConfig(void);
+SERVER_CONFIG* GetServerConfig(void);
 
 //******************************* Function Definition ******************************* //
 
 /**********************************************************************
-* Function name     : get_client_config
-* Description       : to load Client Configuration
+* Function name     : GetServerConfig
+* Description       : to load Server Configuration
 * Arguments         : void
-* Return type       : ClientConfig* - pointer to client configuration
+* Return type       : SERVER_CONFIG* - pointer to server configuration
 *************************************************************************/
-CLIENT_CONFIG* GetClientConfig(void) 
+SERVER_CONFIG* GetServerConfig(void) 
 {
-    printf("Do you want to load custom client configuration? (y/n): ");
+    printf("Do you want to load custom server configuration? (y/n): ");
     char choice = getchar();
     getchar(); // consume newline
     if (choice == 'y' || choice == 'Y') 
     {
-        static CLIENT_CONFIG custom_config;
+        static SERVER_CONFIG custom_config;
         printf("Enter server IP address: ");
-        static char ip_buffer[BUF_SIZE];
+        static char ip_buffer[16];
         scanf("%15s", ip_buffer);
         getchar(); // consume newline
         custom_config.ip = ip_buffer;
         printf("Enter server port: ");
         scanf("%d", &custom_config.port);
         getchar(); // consume newline
-        printf("Loading custom client configuration: IP=%s, PORT=%d\n", custom_config.ip, custom_config.port);
+        printf("Loading custom server configuration: IP=%s, PORT=%d\n", custom_config.ip, custom_config.port);
         return &custom_config;
     }
     else 
     {
-        printf("Loading default client configuration: IP=%s, PORT=%d\n", default_config.ip, default_config.port);
+        printf("Loading default server configuration: IP=%s, PORT=%d\n", default_config.ip, default_config.port);
     }
-    return (CLIENT_CONFIG*)&default_config;
+    return (SERVER_CONFIG*)&default_config;
 }
+
+
+/* End of file */

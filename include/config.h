@@ -14,21 +14,21 @@
 
 /******************************Macro Definitions******************************/
 // Configuration header for Echo Server and Client
-#define PORT                3000
-#define SERVER_IP           "127.0.0.1"
-#define SUCCESS             0
-#define FAILURE             -1
-#define DEF_CLEAR           0
-#define DEF_SET             1
-#define DEF_TRUE            1
-#define NULL_CHAR           '\0'
-#define TIMEOUT_SEC         1
-#define TIMEOUT_USEC        100
-#define MAX_BUFFER_SIZE     1024
-#define BUF_SIZE            256
-#define UDP                 0
-#define PROTOCOL            UDP
+#define PORT            3000
+#define SERVER_IP       "0.0.0.0"
+#define SUCCESS         0
+#define FAILURE         -1
+#define DEF_CLEAR       0
+#define DEF_SET         1
+#define DEF_TRUE        1
+#define DEF_FALSE       0
 
+#define TIMEOUT_SEC     1
+#define TIMEOUT_USEC    100
+#define MAX_BUFFER_SIZE 1024
+
+#define UDP             0
+#define PROTOCOL        UDP
 // Uncomment the following line to enable non-blocking sockets
 //#define NON_BLOCKING
 
@@ -36,14 +36,14 @@
 typedef struct {
     const char* ip;
     int port;
-} CLIENT_CONFIG;
+} SERVER_CONFIG;
 
-static const CLIENT_CONFIG default_config = {
-    (const char*)(SERVER_IP),
+static const SERVER_CONFIG default_config = {
+    SERVER_IP,
     PORT
 };
 
 /******************************Function declaration******************************/
-extern CLIENT_CONFIG* GetClientConfig();
+extern SERVER_CONFIG* GetServerConfig();
 
 #endif // __CONFIG_H__

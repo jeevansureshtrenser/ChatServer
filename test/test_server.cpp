@@ -1,22 +1,22 @@
 #include <gtest/gtest.h>
 extern "C" {
-    #include "client.h"
+    #include "server.h"
     #include "config.h"
 }
 
 // Mock config for testing
-CLIENT_CONFIG mockConfig = {
+SERVER_CONFIG mockConfig = {
     .ip = "127.0.0.1",
     .port = 9090
 };
 
-CLIENT_CONFIG* GetClientConfig() {
+SERVER_CONFIG* GetServerConfig() {
     return &mockConfig;  // override real function
 }
 
-TEST(ClientTest, InitializeClientValidConfig) {
+TEST(ServerTest, InitializeServerValidConfig) {
     int sockfd;
-    struct sockaddr_in* addr = InitializeClient(&sockfd);
+    struct sockaddr_in* addr = InitializeServer(&sockfd);
 
     ASSERT_NE(addr, nullptr);                // should succeed
     EXPECT_EQ(addr->sin_family, AF_INET);    // family set
@@ -24,18 +24,18 @@ TEST(ClientTest, InitializeClientValidConfig) {
     EXPECT_EQ(sockfd >= 0, true);            // socket valid
 
     free(addr); // cleanup malloc
-    CleanupClient(sockfd);
+    CleanupServer(sockfd);
 }
 
-TEST(ClientTest, CleanupClientValidSocket) {
+TEST(ServerTest, CleanupServerValidSocket) {
     int sockfd = socket(AF_INET, SOCK_DGRAM, 0);
     ASSERT_GE(sockfd, 0);
 
-    int result = CleanupClient(sockfd);
+    int result = CleanupServer(sockfd);
     EXPECT_EQ(result, SUCCESS);
 }
 
-TEST(ClientTest, CleanupClientInvalidSocket) {
-    int result = CleanupClient(-1); // invalid fd
+TEST(ServerTest, CleanupServerInvalidSocket) {
+    int result = CleanupServer(-1); // invalid fd
     EXPECT_EQ(result, FAILURE);
 }

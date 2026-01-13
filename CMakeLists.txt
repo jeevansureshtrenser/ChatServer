@@ -9,9 +9,9 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
 
 include_directories(include)
 
-add_executable(chatclient
+add_executable(chatserver
     src/main.c
-    src/client.c
+    src/server.c
     src/config.c
 )
 
@@ -19,8 +19,8 @@ enable_testing()
 find_package(GTest REQUIRED)
 
 add_executable(runTests
-    test/test_client.cpp
-    src/client.c
+    test/test_server.cpp
+    src/server.c
 )
 
 target_include_directories(runTests PRIVATE include)
